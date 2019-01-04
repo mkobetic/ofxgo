@@ -357,6 +357,10 @@ func ParseResponse(reader io.Reader) (*Response, error) {
 		} else if ofxEnd, ok := tok.(xml.EndElement); ok && ofxEnd.Name.Local == "OFX" {
 			return &or, nil // found closing XML element, so we're done
 		} else if start, ok := tok.(xml.StartElement); ok {
+			// ignore the MSGSET elements
+			if strings.Contains(start.Name.Local, "MSGSET") {
+				continue
+			}
 			slice, ok := messageSlices[start.Name.Local]
 			if !ok {
 				return nil, errors.New("Invalid message set: " + start.Name.Local)
