@@ -357,7 +357,7 @@ func ParseResponse(reader io.Reader) (*Response, error) {
 			return nil, err
 		} else if ofxEnd, ok := tok.(xml.EndElement); ok && ofxEnd.Name.Local == "OFX" {
 			return &or, nil // found closing XML element, so we're done
-		} else if ofxEnd, ok := tok.(xml.EndElement); ok && strings.Contains(start.Name.Local, "MSGSET") {
+		} else if ofxEnd, ok := tok.(xml.EndElement); ok && strings.Contains(ofxEnd.Name.Local, "MSGSET") {
 			continue // ignore MSGSET elements
 		} else if start, ok := tok.(xml.StartElement); ok {
 			// ignore MSGSET elements
