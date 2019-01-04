@@ -1,4 +1,4 @@
-module github.com/mkobetic/ofxgo
+module github.com/aclindsa/ofxgo
 
 require (
 	github.com/aclindsa/xml v0.0.0-20171002130543-5d4402bb4a20
