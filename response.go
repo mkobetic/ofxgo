@@ -357,10 +357,11 @@ func ParseResponse(reader io.Reader) (*Response, error) {
 			return nil, err
 		} else if ofxEnd, ok := tok.(xml.EndElement); ok && ofxEnd.Name.Local == "OFX" {
 			return &or, nil // found closing XML element, so we're done
+		} else if ofxEnd, ok := tok.(xml.EndElement); ok && strings.Contains(start.Name.Local, "MSGSET") {
+			continue // ignore MSGSET elements
 		} else if start, ok := tok.(xml.StartElement); ok {
-			// ignore the MSGSET elements
+			// ignore MSGSET elements
 			if strings.Contains(start.Name.Local, "MSGSET") {
-				fmt.Printf("Skipping element %s\n", start.Name.Local)
 				continue
 			}
 			slice, ok := messageSlices[start.Name.Local]
