@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"bytes"
 	"errors"
+	"fmt"
 	"io"
 	"reflect"
 	"strings"
@@ -369,7 +370,7 @@ func ParseResponse(reader io.Reader) (*Response, error) {
 				return nil, err
 			}
 		} else {
-			return nil, errors.New("Found unexpected token")
+			return nil, fmt.Errorf("Found unexpected token: %v", tok)
 		}
 	}
 }
