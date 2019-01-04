@@ -360,6 +360,7 @@ func ParseResponse(reader io.Reader) (*Response, error) {
 		} else if start, ok := tok.(xml.StartElement); ok {
 			// ignore the MSGSET elements
 			if strings.Contains(start.Name.Local, "MSGSET") {
+				fmt.Printf("Skipping element %s\n", start.Name.Local)
 				continue
 			}
 			slice, ok := messageSlices[start.Name.Local]
@@ -370,7 +371,7 @@ func ParseResponse(reader io.Reader) (*Response, error) {
 				return nil, err
 			}
 		} else {
-			return nil, fmt.Errorf("Found unexpected token: %v", tok)
+			return nil, fmt.Errorf("Found unexpected token: %#v", tok)
 		}
 	}
 }
