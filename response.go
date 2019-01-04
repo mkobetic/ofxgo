@@ -372,7 +372,7 @@ func ParseResponse(reader io.Reader) (*Response, error) {
 				return nil, err
 			}
 		} else {
-			return nil, fmt.Errorf("Found unexpected token: %#v", tok)
+			return nil, fmt.Errorf("Found unexpected token")
 		}
 	}
 }
